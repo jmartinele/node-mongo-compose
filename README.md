@@ -42,7 +42,7 @@ npm i --save body-parser@1.17.2
 npm i --save cors@2.8.3
 ```
 
-Ou ainda, todas as depedências podem ser instaladas em uma única linha de comando, caso já tenha a certeza das v ersões:
+Ou ainda, todas as depedências podem ser instaladas em uma única linha de comando, caso já tenha a certeza das versões:
 
 ```sh
 npm i --save express@4.15.3 mongoose@4.11.1 node-restful@0.2.6 body-parser@1.17.2 cors@2.8.3
