@@ -19,7 +19,7 @@
             </div>
             <button class='btn btn-success' save>Salvar</button>
         </div>
-
+        <!-- Abaixo, uma Tabela que será criada dinamicamente usando jquery -->
         <table class="table" id='clients'>
             <thead>
                 <tr>
@@ -34,8 +34,39 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
 
     <script>
-       
+        //Caminho da API
+        const API = 'http://localhost:3000'
+        
+        const getClients = () => {
+            $.ajax({
+                url: `${API}/clients`,
+                success: clients => {
+                    console.log(clients)
+                }
+            })
+        }
+
+        const saveClient = () => {
+            const _id = $('[name=id]').val()
+            const name = $('[name]').val()
+            /* Na chamada AJAX abaixo, neste mesmo método, serão efetudas duas chamadas
+            será feita uma chamada POST, caso o ID não esteja preenchido, para se fazer
+            uma inserção, e PUT, caso o ID esteja "setado", para se fazer uma alteração.*/
+            $.ajax({
+                method: _id ? 'PUT' : 'POST',
+                url: `${API}/clients/${_id}`,
+                data: _id ? { _id, name } : { name },
+                success: getClients
+            })
+        }
+
+        /* Com o código abaixo, Quando a página for carregada, será chamado
+        o método getClients */
+        $(() => {
+            getClients()
+            //Associação do botão com a função saveclient()
+            $('[save]').click(saveClient)
+        })
     </script>
 </body>
-
 </html>
