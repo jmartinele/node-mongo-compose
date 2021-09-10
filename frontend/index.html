@@ -42,12 +42,26 @@
             //Abaixo a forma de se criar em Jquery um elemento dinamicamente
             return $('<button>').addClass(`btn btn-${type}`).html(label)
         }
+
+        const renderRows = clients => {
+            const rows = clients.map(client => {
+                const updateButton = createButton('Atualizar', 'warning')
+                const removeButton = createButton('Remover', 'danger')
+
+                return $('<tr>')
+                    .append($('<td>').append(client.name))
+                    .append($('<td>').append(updateButton).append(removeButton))
+            })
+
+            $('#clientsRows').html(rows)
+        }
        
         const getClients = () => {
             $.ajax({
                 url: `${API}/clients`,
                 success: clients => {
-                    console.log(clients)
+                    //console.log(clients)
+                    renderRows(clients)
                 }
             })
         }
@@ -70,7 +84,8 @@
         o método getClients */
         $(() => {
             getClients()
-            //Associação do botão com a função saveclient()
+            // Associação do botão com a função saveclient()
+            // Ou seja, me dê quem tem o atributo 'save'
             $('[save]').click(saveClient)
         })
     </script>
