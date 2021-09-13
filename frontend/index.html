@@ -47,20 +47,32 @@
             const rows = clients.map(client => {
                 const updateButton = createButton('Atualizar', 'warning')
                 const removeButton = createButton('Remover', 'danger')
+                //Chamando a funcão removeButton, passando o cliente como parâmetro
+                removeButton.click(() => removeClient(client))
 
                 return $('<tr>')
                     .append($('<td>').append(client.name))
-                    .append($('<td>').append(updateButton).append(removeButton))
+                    .append($('<td>').append(updateButton).append(' ').append(removeButton))
             })
 
             $('#clientsRows').html(rows)
         }
-       
+
+        const removeClient = client => {
+            $.ajax({
+                method: 'DELETE',
+                // Abaixo a forma padrão do REST para chamada de uma exclusão
+                url: `${API}/clients/${client._id}`,
+                /* Para atualizar a lista de clientes, é feita a
+                chamada do método getClients() */
+                success: getClients
+            })
+        }
+
         const getClients = () => {
             $.ajax({
                 url: `${API}/clients`,
                 success: clients => {
-                    //console.log(clients)
                     renderRows(clients)
                 }
             })
@@ -90,4 +102,5 @@
         })
     </script>
 </body>
+
 </html>
