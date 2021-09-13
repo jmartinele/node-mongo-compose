@@ -46,6 +46,9 @@
         const renderRows = clients => {
             const rows = clients.map(client => {
                 const updateButton = createButton('Atualizar', 'warning')
+                //Chamando a funcão loadClient, passando o cliente como parâmetro
+                updateButton.click(() => loadClient(client))
+
                 const removeButton = createButton('Remover', 'danger')
                 //Chamando a funcão removeButton, passando o cliente como parâmetro
                 removeButton.click(() => removeClient(client))
@@ -56,6 +59,12 @@
             })
 
             $('#clientsRows').html(rows)
+        }
+
+        const loadClient = client => {
+            $('[name=id]').val(client._id)
+            $('[name=name]').val(client.name)
+            $('[name]').focus()
         }
 
         const removeClient = client => {
@@ -74,6 +83,8 @@
                 url: `${API}/clients`,
                 success: clients => {
                     renderRows(clients)
+                    $('[name]').val('')
+                    $('[name]').focus()
                 }
             })
         }
