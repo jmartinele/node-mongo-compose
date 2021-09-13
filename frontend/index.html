@@ -15,9 +15,10 @@
             <input name='id' type='hidden' />
             <div class="form-group">
                 <label for="Name"></label>
-                <input class='form-control' name='name' placeholder='Digite aqui o nome...' />
+                <input class='form-control' name='name' id="name" placeholder='Digite aqui o nome...' />
             </div>
             <button class='btn btn-success' save>Salvar</button>
+            <button class='btn btn-warning' onclick="$('[name]').val(''); $('[name]').focus()">Limpar</button>
         </div>
         <!-- Abaixo, uma Tabela que será criada dinamicamente usando jquery -->
         <table class="table" id='clients'>
