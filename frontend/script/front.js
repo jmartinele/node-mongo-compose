@@ -75,3 +75,9 @@
             // Ou seja, me dê quem tem o atributo 'save'
             $('[save]').click(saveClient)
         })
+
+        //Função para limpar campos
+        const limparCampos = () => {
+            $('[name]').val('')
+            $('[name]').focus()
+        }
